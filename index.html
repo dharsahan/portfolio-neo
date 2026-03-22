@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #f4f4f0;
+            --text-color: #111;
+            --primary-color: #ff5e5b;
+            --secondary-color: #00cecb;
+            --tertiary-color: #ffed66;
+            --border-width: 4px;
+            --shadow-offset: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3 {
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .header {
+            border: var(--border-width) solid var(--text-color);
+            background-color: var(--primary-color);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--text-color);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .header:hover {
+            transform: translate(2px, 2px);
+            box-shadow: calc(var(--shadow-offset) - 2px) calc(var(--shadow-offset) - 2px) 0 var(--text-color);
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: var(--border-width) solid var(--text-color);
+            padding: 0.5rem 1rem;
+            background-color: var(--tertiary-color);
+            box-shadow: 4px 4px 0 var(--text-color);
+            transition: all 0.1s;
+        }
+
+        .nav-link:hover, .nav-link:focus {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--text-color);
+            background-color: white;
+            outline: none;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            border: var(--border-width) solid var(--text-color);
+            background-color: white;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--text-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card[data-color="secondary"] {
+            background-color: var(--secondary-color);
+        }
+
+        .card[data-color="tertiary"] {
+            background-color: var(--tertiary-color);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--text-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .card p {
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            border: var(--border-width) solid var(--text-color);
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            text-transform: uppercase;
+            text-align: center;
+            box-shadow: 4px 4px 0 var(--text-color);
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .btn:hover, .btn:focus {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--text-color);
+            outline: none;
+        }
+
+        .btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0 0 0 var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header" id="about">
+        <h1>Hi, I'm Dharshan Balaji</h1>
+        <p>I build things with code</p>
+    </header>
+
+    <nav class="nav">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <main>
+        <section id="projects" style="margin-bottom: 3rem;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; background-color: var(--tertiary-color); display: inline-block; padding: 0.5rem 1rem; border: var(--border-width) solid var(--text-color); box-shadow: 4px 4px 0 var(--text-color);">Featured Projects</h2>
+           
+            <div class="grid">
+                <article class="card" data-color="white">
+                    <h3>Smart file Organizer</h3>
+                    <p>A linux feature to add organize file in the System autonously</p>
+                    <a href="#" class="btn" data-testid="Smart-file-organizer-link">View Project</a>
+                </article>
+		<article class='card' data-color='white'>
+			<h3>Farmertopia</h3>
+			<p>A webpage to assist farmers to help the grow plants and marketplace easy pecuring of materials and a community to discuss their problem with others </p>
+			<a href="#" class="btn" data-testid="Farmertopia-link">View Project</a>
+		</article>
+               
+          </div>
+        </section>
+
+        <section id="contact" style="border: var(--border-width) solid var(--text-color); padding: 2rem; background-color: var(--text-color); color: var(--bg-color); box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--primary-color);">
+            <h2 style="font-size: 2rem; margin-bottom: 1rem; color: var(--primary-color);">Let's Work Together</h2>
+            <p style="margin-bottom: 1.5rem;">Ready to build something awesome? Get in touch.</p>
+	    <p>Email: dharshanbalaji83@gmail.com</p>
+	    <p style="margin-bottom: 1.5rem;">Phone: 9092646031</p>
+            <button class="btn" style="background-color: var(--secondary-color); box-shadow:var(FFFFFF);" id="contact-btn">Get in touch</button>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('contact-btn').addEventListener('click', () => {
+            alert('Not yet Implemented');
+	    alert('Use the above give details to Get in Touch')
+        });
+    </script>
+</body>
+</html>
