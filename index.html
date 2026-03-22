@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Dharshan Balaji | Portfolio</title>
     <style>
         :root {
             --bg-color: #f4f4f0;
@@ -13,6 +13,10 @@
             --tertiary-color: #ffed66;
             --border-width: 4px;
             --shadow-offset: 8px;
+        }
+
+        html {
+            scroll-behavior: smooth; 
         }
 
         * {
@@ -43,7 +47,8 @@
             padding: 2rem;
             margin-bottom: 3rem;
             box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--text-color);
-            transition: transform 0.1s, box-shadow 0.1s;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            animation: slideInDown 0.5s ease-out forwards;
         }
 
         .header:hover {
@@ -53,7 +58,12 @@
 
         .header h1 {
             font-size: 4rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            font-weight: bold;
         }
 
         .nav {
@@ -61,6 +71,7 @@
             gap: 1rem;
             margin-bottom: 3rem;
             flex-wrap: wrap;
+            animation: fadeIn 0.8s ease-out forwards;
         }
 
         .nav-link {
@@ -82,6 +93,21 @@
             outline: none;
         }
 
+        section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 2rem; 
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background-color: var(--tertiary-color);
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: var(--border-width) solid var(--text-color);
+            box-shadow: 4px 4px 0 var(--text-color);
+        }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -95,14 +121,12 @@
             box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--text-color);
             display: flex;
             flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .card[data-color="secondary"] {
-            background-color: var(--secondary-color);
-        }
-
-        .card[data-color="tertiary"] {
-            background-color: var(--tertiary-color);
+        .card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: calc(var(--shadow-offset) + 4px) calc(var(--shadow-offset) + 4px) 0 var(--text-color);
         }
 
         .card h3 {
@@ -115,6 +139,7 @@
         .card p {
             margin-bottom: 1.5rem;
             flex-grow: 1;
+            font-size: 1.05rem;
         }
 
         .btn {
@@ -123,13 +148,15 @@
             color: var(--text-color);
             font-weight: bold;
             border: var(--border-width) solid var(--text-color);
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem;
             background-color: var(--primary-color);
             text-transform: uppercase;
             text-align: center;
             box-shadow: 4px 4px 0 var(--text-color);
             cursor: pointer;
             transition: all 0.1s;
+            font-family: inherit;
+            font-size: 1rem;
         }
 
         .btn:hover, .btn:focus {
@@ -143,9 +170,138 @@
             box-shadow: 0 0 0 var(--text-color);
         }
 
+        .btn-secondary {
+            background-color: var(--secondary-color);
+        }
+
+        .contact-section {
+            border: var(--border-width) solid var(--text-color);
+            padding: 3rem 2rem;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--primary-color);
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .contact-info {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-section .btn {
+            box-shadow: 4px 4px 0 var(--bg-color);
+        }
+        
+        .contact-section .btn:hover {
+            box-shadow: 2px 2px 0 var(--bg-color);
+        }
+
+        footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: var(--border-width) solid var(--text-color);
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background-color: var(--bg-color);
+            border: var(--border-width) solid var(--text-color);
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 12px 12px 0 var(--primary-color);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .modal-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--tertiary-color);
+            border: 2px solid var(--text-color);
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 2px 2px 0 var(--text-color);
+        }
+
+        .close-btn:hover {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0 var(--text-color);
+        }
+
+        @keyframes slideInDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .contact-section h2 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -154,7 +310,7 @@
 
     <header class="header" id="about">
         <h1>Hi, I'm Dharshan Balaji</h1>
-        <p>I build things with code</p>
+        <p>I build things with code.</p>
     </header>
 
     <nav class="nav">
@@ -164,37 +320,69 @@
     </nav>
 
     <main>
-        <section id="projects" style="margin-bottom: 3rem;">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; background-color: var(--tertiary-color); display: inline-block; padding: 0.5rem 1rem; border: var(--border-width) solid var(--text-color); box-shadow: 4px 4px 0 var(--text-color);">Featured Projects</h2>
+        <section id="projects">
+            <h2 class="section-title">Featured Projects</h2>
            
             <div class="grid">
-                <article class="card" data-color="white">
-                    <h3>Smart file Organizer</h3>
-                    <p>A linux feature to add organize file in the System autonously</p>
+                <article class="card">
+                    <h3>Smart File Organizer</h3>
+                    <p>A Linux feature designed to autonomously organize files within the system, keeping your directories clean and efficient.</p>
                     <a href="#" class="btn" data-testid="Smart-file-organizer-link">View Project</a>
                 </article>
-		<article class='card' data-color='white'>
-			<h3>Farmertopia</h3>
-			<p>A webpage to assist farmers to help the grow plants and marketplace easy pecuring of materials and a community to discuss their problem with others </p>
-			<a href="#" class="btn" data-testid="Farmertopia-link">View Project</a>
-		</article>
-               
-          </div>
+
+                <article class="card">
+                    <h3>Farmertopia</h3>
+                    <p>A web platform assisting farmers to help them grow plants, featuring a marketplace for easy procurement of materials and a community forum to discuss problems and solutions.</p>
+                    <a href="#" class="btn btn-secondary" data-testid="Farmertopia-link">View Project</a>
+                </article>
+            </div>
         </section>
 
-        <section id="contact" style="border: var(--border-width) solid var(--text-color); padding: 2rem; background-color: var(--text-color); color: var(--bg-color); box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--primary-color);">
-            <h2 style="font-size: 2rem; margin-bottom: 1rem; color: var(--primary-color);">Let's Work Together</h2>
-            <p style="margin-bottom: 1.5rem;">Ready to build something awesome? Get in touch.</p>
-	    <p>Email: dharshanbalaji83@gmail.com</p>
-	    <p style="margin-bottom: 1.5rem;">Phone: 9092646031</p>
-            <button class="btn" style="background-color: var(--secondary-color); box-shadow:var(FFFFFF);" id="contact-btn">Get in touch</button>
+        <section id="contact" class="contact-section">
+            <h2>Let's Work Together</h2>
+            <div class="contact-info">
+                <p>Ready to build something awesome? Get in touch.</p>
+                <br>
+                <p><strong>Email:</strong> dharshanbalaji83@gmail.com</p>
+                <p><strong>Phone:</strong> 9092646031</p>
+            </div>
+            <button class="btn btn-secondary" id="contact-btn">Message Me</button>
         </section>
     </main>
 
+    <footer>
+        <p>&copy; <span id="year"></span> Dharshan Balaji. Built with passion.</p>
+    </footer>
+
+    <div class="modal-overlay" id="custom-modal">
+        <div class="modal-content">
+            <button class="close-btn" id="close-modal">&times;</button>
+            <h3>Feature Coming Soon!</h3>
+            <p>Direct messaging is not yet implemented.</p>
+            <p>Please use the provided email or phone number to get in touch with me. I look forward to hearing from you!</p>
+            <a href="mailto:dharshanbalaji83@gmail.com" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">Send Email Now</a>
+        </div>
+    </div>
+
     <script>
-        document.getElementById('contact-btn').addEventListener('click', () => {
-            alert('Not yet Implemented');
-	    alert('Use the above give details to Get in Touch')
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const contactBtn = document.getElementById('contact-btn');
+        const modal = document.getElementById('custom-modal');
+        const closeBtn = document.getElementById('close-modal');
+
+        contactBtn.addEventListener('click', () => {
+            modal.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
         });
     </script>
 </body>
